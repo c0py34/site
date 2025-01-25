@@ -1,101 +1,235 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire de Sécurité du Nom de Domaine</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;700&display=swap" rel="stylesheet">
+    <title>me</title>
     <style>
+        :root { 
+          --backcol: #393939;
+          --txt: #FDFAC3;
+          --lnk: #ffffff;
+          --input-boder: #ff9000;
+          --lnk-underline: #399dff;
+        }
         body {
-            background-color: #1a1a1a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: var(--backcol);
+            color: var(--txt);
+            font-family: 'Exo', sans-serif;
             margin: 0;
-            font-family: Arial, sans-serif;
+            padding: 0;
+        }  
+        a {
+            color: var(--lnk);
+            font-weight: bold;
+            font-size:17px;
+            text-decoration: none;
+            position: relative;
+            
         }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-            backdrop-filter: blur(10px);
-            width: 300px;
-            text-align: center;
-        }
-        .container h1 {
-            color: #ffa500;
-            margin-bottom: 20px;
-        }
-        .container input[type="text"],
-        .container input[type="password"],
-        .container select {
+        a::after {
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            left: 0;
             width: 100%;
+            height: 5px;
+            opacity: 0.9;
+            background-color: var(--lnk-underline);
+            z-index: -1;
+        }
+        .top-bar { 
+          display: block;
+          position: sticky;
+          top: 4px;
+          height: 20px;
+          font-size: 16px;
+          padding-left: 5px;
+          border-bottom: 0.5px solid white;
+          border-top: 0.5px solid white;
+        }
+        .top-but { 
+          display: inline;
+          position: relative;
+          float: right;
+          left: -10px;
+        }
+        .scroll-progress-bar {
+            position: sticky;
+            top: 0; 
+            height: 3px; 
+            background-color: var(--input-boder); 
+            width: 0%; 
+            z-index: 100; 
+        }
+        .lorem {
+          border: 1px solid #f00; /* Encadré rouge */
+          height: 2000px; /* Garde la hauteur définie */
+        }
+        .banner { 
+          display: block;
+          position: relative ;
+          height: 15vh;
+          z-index: -1;
+        }
+        .logo { 
+          position: relative;
+          margin-top: 5px;
+          height:95px;
+          width: 200px;
+        }
+        footer {
+            background-color: var(--backcol);
+            color: var(--txt);
+            text-align: center;
+            padding: 20px 10px;
+            border-top:1px solid #fff;
+        }
+        
+        
+        .name, .email, .phone, .message, .submit { 
+            position: relative;
+            font-family: "Exo";
+            margin-bottom: 10px;
             padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffa500;
-            box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+            width: calc(100% - 20px);
+            max-width: 70vw;
+            
+            background-color: #666666;
+            color: var(--txt);
+            border: 2px solid var(--input-boder); /* Liseré citron */
+            box-shadow: 0 4px 8px var(--input-boder); /* Ombre citron */
+            padding: 5px;
+            outline: none;
+            border-radius: 5px; 
         }
-        .container input[type="radio"] {
-            margin: 0 5px;
+        .name::placeholder, .email::placeholder, .phone::placeholder, .message::placeholder { 
+          color:  var(--txt);
         }
-        .container label {
-            color: #ffa500;
+        
+        footer .social-icons i {
+          position: relative;
+          margin-top: 10px;
+          margin-right: 10px;
+          font-size: 20px;
         }
-        .container button {
-            background-color: #ffa500;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px 5px;
-            border-radius: 4px;
-            cursor: pointer;
-            color: #1a1a1a;
-            box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+        
+        .tech { 
+          font-size: 20px;
         }
-        .container button:hover {
-            background-color: #ff8c00;
+        .repair { 
+          
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Nom de Domaine</h1>
-        <form id="domainForm" action="/0bey_domain" method="POST">
-            <input type="text" name="domain_name" placeholder="Nom de domaine" required>
-            <div>
-                <label><input type="radio" name="security" value="private" required> Privé</label>
-                <label><input type="radio" name="security" value="public"> Public</label>
-            </div>
-            <input type="password" name="password" placeholder="Mot de passe" required>
-            <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
-            <button type="button" onclick="submitForm('cancel')">Annuler</button>
-            <button type="button" onclick="submitForm('save')">Enregistrer</button>
-        </form>
+    <!-- Barre de progression -->
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+    <div class="top-bar">
+      <i class="fa fa-phone"></i>
+      tel: <a href="tel:+33123456789">0744133354</a>
+      ou
+      <i class="fa fa-envelope"></i>
+      <a href="sms:+33612345678">sms</a>
+      <div class="top-but">
+          <a href="#" id="scrollToFooter"><i class="fa fa-map"></i></a>
+          <i class="fa fa-comment"></i>
+      </div>
     </div>
 
-    <script>
-        function submitForm(action) {
-            const form = document.getElementById('domainForm');
-            const formData = new FormData(form);
-            formData.append('action', action);
+    <div class="banner">
+      <img src="https://raw.githubusercontent.com/c0py34/site/refs/heads/main/logo.png" class="logo" alt="logo" width="50" height="50" loading="lazy">
+    </div>
+    
+    <div class="lorem">
+      <i class="fa fa-clipboard"></i> test de <a href="http://google.fr">lien stylisé</a> sans anim
+    </div>
 
-            fetch('/submy', {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                if (response.ok) {
-                    alert('Formulaire soumis avec succès!');
-                } else {
-                    alert('Erreur lors de la soumission du formulaire.');
-                }
-            }).catch(error => {
-                console.error('Erreur:', error);
-                alert('Erreur lors de la soumission du formulaire.');
-            });
+    <!-- Footer -->
+    <footer>
+      <a id="bottom"></a>
+
+        <!-- Formulaire de contact -->
+        <form action="#" method="post" onsubmit="return validateForm()">
+            <input class="name" type="text" name="name" id="name" placeholder="Nom (obligatoire)" required>
+            
+            <!-- Email et téléphone : l'un des deux requis -->
+            <input class="email" type="email" name="email" id="email" placeholder="Email (optionnel)">
+            <input class="phone" type="tel" name="phone" id="phone" placeholder="Numéro de téléphone (optionnel)">
+            
+            <!-- Champ message obligatoire -->
+            <textarea class="message" name="message" id="message" rows="4" placeholder="Message (obligatoire)" required></textarea>
+            
+            <!-- Bouton d'envoi -->
+            <button class="submit" type="submit">Envoyer</button>
+        </form>
+
+        <!-- Icônes sociales -->
+        <div class="social-icons">
+            <a href="#"><i class="fa fa-phone"></i></a>
+            <a href="#"><i class="fa fa-sms"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-facebook-messenger"></i></a>
+        </div>
+
+        <!-- Adresse -->
+        <p><span class="tech">Tech</span><span class="repair">repair</span></p>
+              <img src="https://raw.githubusercontent.com/c0py34/site/refs/heads/main/logo.png" class="logo" alt="logo" width="50" height="50" loading="lazy">
+        <p>Adresse : 9 plan d'artigues, 34300 Agde</p>
+
+        <!-- Google Map -->
+<iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.1234567890123!2d3.4523456!3d43.3101234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6abcd12345678%3A0xabcdef1234567890!2s9%20Plan%20d&#39;Artigues%2C%2034300%20Agde%2C%20France!5e0!3m2!1sfr!2sfr!4v1616588252648" 
+  width="100%" 
+  height="200" 
+  style="border:0;" 
+  allowfullscreen="" 
+  loading="lazy">
+</iframe>
+
+
+        <!-- Lien pour remonter en haut -->
+        <p><a href="#top">Remonter en haut</a></p>
+    </footer>
+
+    <script>
+    document.getElementById('scrollToFooter').addEventListener('click', function(e) {
+        e.preventDefault(); // Empêche le comportement par défaut du lien
+        document.querySelector('footer').scrollIntoView({ 
+            behavior: 'smooth' // Active le défilement fluide
+        });
+    });
+</script>
+
+    <!-- Script pour gérer la barre de progression -->
+
+    <script>
+        const progressBar = document.getElementById('scrollProgressBar');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY; 
+            const docHeight = document.body.scrollHeight - window.innerHeight; 
+            const scrollPercent = (scrollTop / docHeight) * 100;
+
+            progressBar.style.width = scrollPercent + '%';
+        });
+
+        // Validation du formulaire
+        function validateForm() {
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            if (!email && !phone) {
+                alert("Veuillez remplir soit l'email, soit le numéro de téléphone.");
+                return false; // Empêche l'envoi du formulaire
+            }
+
+            return true; // Permet l'envoi si tout est correct
         }
     </script>
 </body>
