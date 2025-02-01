@@ -2,8 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site avec Effet Parallaxe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Haut de page incliné</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Exo">
     <style>
         * {
             margin: 0;
@@ -11,129 +16,151 @@
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
+        html, body {
+            width: 100%;
+            max-width: 100%;
             overflow-x: hidden;
-            font-family: Arial, sans-serif;
-        }
-
-        #site {
             position: relative;
-            width: 100%;
-            min-height: 100vh;
-            padding-bottom: 150px; /* Réserve de l'espace pour le footer */
+            color: #ffffff;
+            font-family: "Exo";
         }
 
-        #top {
-            height: 100vh;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        body {
+            overflow: hidden; /* Bloque TOUS les débordements */
+            background-color: black;
         }
 
-        .logo {
-            width: 150px;
-            filter: drop-shadow(0 0 15px #0ff);
+        .wrapper {
+            width: 100vw;
+            overflow: hidden; 
+            position: relative;
         }
 
-        .neon-text {
-            color: #0ff;
-            font-size: 2.5rem;
-            text-shadow: 0 0 10px #0ff,
-                         0 0 20px #0ff,
-                         0 0 30px #0ff;
-        }
-
-        .scroll-btn {
+        .header {
             position: absolute;
-            bottom: 30px;
+            top: -150px;
             left: 50%;
-            transform: translateX(-50%);
-            cursor: pointer;
-            animation: bounce 2s infinite;
-            opacity: 0.8;
-            color: white;
-            font-size: 2rem;
+            transform: translateX(-50%) rotate(-8deg);
+            width: 1900px;
+            height: 400px;
+            background-color: #2b2b2b;
+            border: 4px solid #ffce00;
+            border-radius: 30px;
+            box-shadow: 0 0 30px 10px #ff007f;
         }
-
-        .section {
-            height: 100vh; /* Chaque section occupe toute la hauteur de la fenêtre */
-            padding: 50px;
-            background-color: #111; /* Couleur de fond des sections */
-            color: white; /* Couleur du texte */
-        }
-
-        .img-section {
-            height: 100vh; /* Chaque image occupe toute la hauteur de la fenêtre */
-        }
-
-        .fixed-img {
-            position: fixed; /* L'image reste fixe pendant le scroll */
-            top: 0; /* Alignée en haut de la fenêtre */
-            left: 0; 
-            width: 100%; /* S'étend sur toute la largeur */
-            height: 100vh; /* S'étend sur toute la hauteur de la fenêtre */
-            object-fit: cover; /* L'image s'adapte sans être déformée */
-            z-index: -1; /* L'image reste derrière le contenu */
-        }
-
-        #footer {
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
+        .particles{
             width: 100%;
-            height: 150px; 
-            background-color: #333; 
-            color:white; 
-          display:flex ;
-          align-items:center ;
-          justify-content:center ;
-          font-size-adjustable;}
-          
-          @keyframes bounce {from }
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        .site {
+            position: relative;
+            display: flex;
+            flex-direction: column ;
+            width: 2000px;
+            height: 1500px;
+            /*max-width: 1000px;*/
+            background-color: transparent;
+        }
+        
+        /* mobile (max-width: 768px) */
+        @media (max-width: 768px) {
+            .header {
+                height: 650px;
+                width: 1000px;
+            }
+            .top { 
+                flex-wrap: wrap;
+            }
+        }
+        
+        
+        .top { 
+          display: block;
+          flex-wrap: wrap;
+          width: 100vw;
+          max-width: 1000px;
+          height: 700px;
+          border:1px solid red ;
+        }
+        
+        .logo { 
+          --col-bg: rgba(12,12,12, 0.4);
+          --col-logo: #ffce00;
+          --col-tech: #ffce00;
+          --col-repair: #1efedb;
+          position: relative;
+          display: flex; 
+          /*align-items: flex-start;*/
+          font-family: "Zen Dots", serif;
+          margin: 50px;
+          width: 250px !important;
+          background-color: var(--col-bg);
+          border: 2px solid var(--col-logo);
+          border-radius: 15px;
+    }
+    
+    .logo-container {
+      background-color: transparent;
+      display: inline-block; 
+      margin-top: 5px;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      width: 60px;
+      height: 90px;
+      background-color: var(--col-logo);
+      -webkit-mask-image: url('wlogo.png');
+      mask-image: url('wlogo.png');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+    }
+    .text-container {
+      display: flex;
+      flex-direction: column;
+    }
+    .tech {
+      position: relative;
+      top: -8px ;
+      font-size: 65px;
+      color: var(--col-tech);
+    }
+    .repair {
+      font-size: 30px; 
+      font-weight: bold;
+      line-height: 0.8; 
+      margin-top: -18px; 
+      margin-left: 10px ;
+      color: var(--col-repair);
+    }
+    
+ 
     </style>
 </head>
 <body>
-    <div id="site">
-        <section id="top">
-           <img src="https://cdn-icons-png.flaticon.com/512/3069/3069211.png" alt="Logo" class="logo">
-           <div class="neon-text">24/7 • +33 (7)44-13-33-54</div>
-           <div class="scroll-btn" onclick="smoothScroll('#section2')">↓</div>
-       </section>
+    <div class="wrapper">
+        <div class="header">
+          <div id="jsi-particle-container" class="particles"></div>
+        </div>
+        <div class="site">
+          
+          <div class="top">
+            <div class="logo">
+              <div class="logo-container"></div>
+                <div class="text-container">
+                  <span class="tech">tech</span>
+                  <span class="repair">repair</span>
+                </div>
+              </div>
+              <p>un problème ?</p>
+            </div>
+        </div>
+        
+    </div>
+    
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  <script  src="./particles.js"></script>
 
-       <section id="section2" class="section">
-           <h2>Section Présentation</h2>
-           <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
-       </section>
-
-       <!-- Première image fixe -->
-       <div class="img-section">
-           <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="Image fixe" class="fixed-img">
-       </div>
-
-       <section id="section3" class="section">
-           <h2>Section Services</h2>
-           <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
-       </section>
-
-       <!-- Deuxième image fixe -->
-       <div class="img-section">
-           <img src="https://images.unsplash.com/photo-1493244040629-496f6d136cc3"
-       </div>
-
-       <div id="footer">
-           © Mon Site Web - Tous droits réservés
-       </div>
-   </div>
-
-   <script>
-       function smoothScroll(target) {
-           document.querySelector(target).scrollIntoView({
-               behavior:'smooth'
-           });
-       }
-   </script>
 </body>
 </html>
