@@ -3,234 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;700&display=swap" rel="stylesheet">
-    <title>me</title>
+    <title>Site avec Effet Parallaxe</title>
     <style>
-        :root { 
-          --backcol: #393939;
-          --txt: #FDFAC3;
-          --lnk: #ffffff;
-          --input-boder: #ff9000;
-          --lnk-underline: #399dff;
-        }
-        body {
-            background-color: var(--backcol);
-            color: var(--txt);
-            font-family: 'Exo', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-        }  
-        a {
-            color: var(--lnk);
-            font-weight: bold;
-            font-size:17px;
-            text-decoration: none;
-            position: relative;
-            
+            box-sizing: border-box;
         }
-        a::after {
-            content: "";
-            position: absolute;
-            bottom: 0px;
-            left: 0;
+
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #site {
+            position: relative;
             width: 100%;
-            height: 5px;
-            opacity: 0.9;
-            background-color: var(--lnk-underline);
-            z-index: -1;
+            min-height: 100vh;
+            padding-bottom: 150px; /* Réserve de l'espace pour le footer */
         }
-        .top-bar { 
-          display: block;
-          position: sticky;
-          top: 4px;
-          height: 20px;
-          font-size: 16px;
-          padding-left: 5px;
-          border-bottom: 0.5px solid white;
-          border-top: 0.5px solid white;
+
+        #top {
+            height: 100vh;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .top-but { 
-          display: inline;
-          position: relative;
-          float: right;
-          left: -10px;
+
+        .logo {
+            width: 150px;
+            filter: drop-shadow(0 0 15px #0ff);
         }
-        .scroll-progress-bar {
-            position: sticky;
-            top: 0; 
-            height: 3px; 
-            background-color: var(--input-boder); 
-            width: 0%; 
-            z-index: 100; 
+
+        .neon-text {
+            color: #0ff;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px #0ff,
+                         0 0 20px #0ff,
+                         0 0 30px #0ff;
         }
-        .lorem {
-          border: 1px solid #f00; /* Encadré rouge */
-          height: 2000px; /* Garde la hauteur définie */
+
+        .scroll-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            opacity: 0.8;
+            color: white;
+            font-size: 2rem;
         }
-        .banner { 
-          display: block;
-          position: relative ;
-          height: 15vh;
-          z-index: -1;
+
+        .section {
+            height: 100vh; /* Chaque section occupe toute la hauteur de la fenêtre */
+            padding: 50px;
+            background-color: #111; /* Couleur de fond des sections */
+            color: white; /* Couleur du texte */
         }
-        .logo { 
-          position: relative;
-          margin-top: 5px;
-          height:95px;
-          width: 200px;
+
+        .img-section {
+            height: 100vh; /* Chaque image occupe toute la hauteur de la fenêtre */
         }
-        footer {
-            background-color: var(--backcol);
-            color: var(--txt);
-            text-align: center;
-            padding: 20px 10px;
-            border-top:1px solid #fff;
+
+        .fixed-img {
+            position: fixed; /* L'image reste fixe pendant le scroll */
+            top: 0; /* Alignée en haut de la fenêtre */
+            left: 0; 
+            width: 100%; /* S'étend sur toute la largeur */
+            height: 100vh; /* S'étend sur toute la hauteur de la fenêtre */
+            object-fit: cover; /* L'image s'adapte sans être déformée */
+            z-index: -1; /* L'image reste derrière le contenu */
         }
-        
-        
-        .name, .email, .phone, .message, .submit { 
-            position: relative;
-            font-family: "Exo";
-            margin-bottom: 10px;
-            padding: 10px;
-            width: calc(100% - 20px);
-            max-width: 70vw;
-            
-            background-color: #666666;
-            color: var(--txt);
-            border: 2px solid var(--input-boder); /* Liseré citron */
-            box-shadow: 0 4px 8px var(--input-boder); /* Ombre citron */
-            padding: 5px;
-            outline: none;
-            border-radius: 5px; 
-        }
-        .name::placeholder, .email::placeholder, .phone::placeholder, .message::placeholder { 
-          color:  var(--txt);
-        }
-        
-        footer .social-icons i {
-          position: relative;
-          margin-top: 10px;
-          margin-right: 10px;
-          font-size: 20px;
-        }
-        
-        .tech { 
-          font-size: 20px;
-        }
-        .repair { 
+
+        #footer {
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%;
+            height: 150px; 
+            background-color: #333; 
+            color:white; 
+          display:flex ;
+          align-items:center ;
+          justify-content:center ;
+          font-size-adjustable;}
           
-        }
+          @keyframes bounce {from }
     </style>
 </head>
 <body>
-    <!-- Barre de progression -->
-    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    <div id="site">
+        <section id="top">
+           <img src="https://cdn-icons-png.flaticon.com/512/3069/3069211.png" alt="Logo" class="logo">
+           <div class="neon-text">24/7 • +33 (7)44-13-33-54</div>
+           <div class="scroll-btn" onclick="smoothScroll('#section2')">↓</div>
+       </section>
 
-    <div class="top-bar">
-      <i class="fa fa-phone"></i>
-      tel: <a href="tel:+33123456789">0744133354</a>
-      ou
-      <i class="fa fa-envelope"></i>
-      <a href="sms:+33612345678">sms</a>
-      <div class="top-but">
-          <a href="#" id="scrollToFooter"><i class="fa fa-map"></i></a>
-          <i class="fa fa-comment"></i>
-      </div>
-    </div>
+       <section id="section2" class="section">
+           <h2>Section Présentation</h2>
+           <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+       </section>
 
-    <div class="banner">
-      <img src="https://raw.githubusercontent.com/c0py34/site/refs/heads/main/logo.png" class="logo" alt="logo" width="50" height="50" loading="lazy">
-    </div>
-    
-    <div class="lorem">
-      <i class="fa fa-clipboard"></i> test de <a href="http://google.fr">lien stylisé</a> sans anim
-    </div>
+       <!-- Première image fixe -->
+       <div class="img-section">
+           <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="Image fixe" class="fixed-img">
+       </div>
 
-    <!-- Footer -->
-    <footer>
-      <a id="bottom"></a>
+       <section id="section3" class="section">
+           <h2>Section Services</h2>
+           <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+       </section>
 
-        <!-- Formulaire de contact -->
-        <form action="#" method="post" onsubmit="return validateForm()">
-            <input class="name" type="text" name="name" id="name" placeholder="Nom (obligatoire)" required>
-            
-            <!-- Email et téléphone : l'un des deux requis -->
-            <input class="email" type="email" name="email" id="email" placeholder="Email (optionnel)">
-            <input class="phone" type="tel" name="phone" id="phone" placeholder="Numéro de téléphone (optionnel)">
-            
-            <!-- Champ message obligatoire -->
-            <textarea class="message" name="message" id="message" rows="4" placeholder="Message (obligatoire)" required></textarea>
-            
-            <!-- Bouton d'envoi -->
-            <button class="submit" type="submit">Envoyer</button>
-        </form>
+       <!-- Deuxième image fixe -->
+       <div class="img-section">
+           <img src="https://images.unsplash.com/photo-1493244040629-496f6d136cc3"
+       </div>
 
-        <!-- Icônes sociales -->
-        <div class="social-icons">
-            <a href="#"><i class="fa fa-phone"></i></a>
-            <a href="#"><i class="fa fa-sms"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-facebook-messenger"></i></a>
-        </div>
+       <div id="footer">
+           © Mon Site Web - Tous droits réservés
+       </div>
+   </div>
 
-        <!-- Adresse -->
-        <p><span class="tech">Tech</span><span class="repair">repair</span></p>
-              <img src="https://raw.githubusercontent.com/c0py34/site/refs/heads/main/logo.png" class="logo" alt="logo" width="50" height="50" loading="lazy">
-        <p>Adresse : 9 plan d'artigues, 34300 Agde</p>
-
-        <!-- Google Map -->
-<iframe 
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.1234567890123!2d3.4523456!3d43.3101234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6abcd12345678%3A0xabcdef1234567890!2s9%20Plan%20d&#39;Artigues%2C%2034300%20Agde%2C%20France!5e0!3m2!1sfr!2sfr!4v1616588252648" 
-  width="100%" 
-  height="200" 
-  style="border:0;" 
-  allowfullscreen="" 
-  loading="lazy">
-</iframe>
-
-
-        <!-- Lien pour remonter en haut -->
-        <p><a href="#top">Remonter en haut</a></p>
-    </footer>
-
-    <script>
-    document.getElementById('scrollToFooter').addEventListener('click', function(e) {
-        e.preventDefault(); // Empêche le comportement par défaut du lien
-        document.querySelector('footer').scrollIntoView({ 
-            behavior: 'smooth' // Active le défilement fluide
-        });
-    });
-</script>
-
-    <!-- Script pour gérer la barre de progression -->
-
-    <script>
-        const progressBar = document.getElementById('scrollProgressBar');
-        
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY; 
-            const docHeight = document.body.scrollHeight - window.innerHeight; 
-            const scrollPercent = (scrollTop / docHeight) * 100;
-
-            progressBar.style.width = scrollPercent + '%';
-        });
-
-        // Validation du formulaire
-        function validateForm() {
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            
-            if (!email && !phone) {
-                alert("Veuillez remplir soit l'email, soit le numéro de téléphone.");
-                return false; // Empêche l'envoi du formulaire
-            }
-
-            return true; // Permet l'envoi si tout est correct
-        }
-    </script>
+   <script>
+       function smoothScroll(target) {
+           document.querySelector(target).scrollIntoView({
+               behavior:'smooth'
+           });
+       }
+   </script>
 </body>
 </html>
